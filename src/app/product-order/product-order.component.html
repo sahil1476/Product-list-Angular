@@ -1,0 +1,50 @@
+<!-- src/app/product-order/product-order.component.html -->
+<div>
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Quantity</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of orderList; let i = index">
+          <td >
+            <select [(ngModel)]="product.name">
+              <option >Choose Product</option>
+              <option *ngFor="let p of availableProducts">{{ p }}</option>
+            </select>
+          </td>
+          <td>
+            <select [(ngModel)]="product.quantity">
+              <option>Choose Quantity</option>
+              <option *ngFor="let q of [0,1, 2, 3, 4, 5]">{{ q }}</option>
+            </select>
+          </td>
+          <td>
+            <button (click)="addProduct(i)" [disabled]="product.name === 'Choose Product' || product.quantity === 0">ADD</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="showbtn" (click)="showOrder()">Show Order</button>
+  </div>
+  <!-- align -->
+  <div>
+  <div *ngIf="finalOrderList.length" class="order-container">
+  <h3>Your Order</h3>
+  <ul>
+    <li *ngFor="let product of finalOrderList">
+        <table>
+            <tr>
+              <td>{{ product.name }}</td>
+              <td>{{ product.quantity }}</td>
+            </tr>
+        </table>
+        
+    </li>
+  </ul>
+  <button (click)="speakOrder()">What is my Order?</button>
+</div>
+</div>  
